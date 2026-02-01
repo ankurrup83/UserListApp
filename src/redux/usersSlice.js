@@ -4,27 +4,27 @@ export const fetchUsers = createAsyncThunk(
   'users/fetchUsers',
   async (page, { rejectWithValue }) => {
     try {
-      const res = await fetch(
+      const response = await fetch(
         `https://jsonplaceholder.typicode.com/users?_page=${page}&_limit=5`
       );
-      return await res.json();
+      return await response.json();
     } catch (error) {
       return rejectWithValue('Failed to fetch users');
     }
   }
 );
 
-const usersSlice = createSlice({
+const userSlice = createSlice({
   name: 'users',
   initialState: {
-    users: [],
+    list: [],
     page: 1,
     loading: false,
     error: null,
   },
   reducers: {
     resetUsers: (state) => {
-      state.users = [];
+      state.list = [];
       state.page = 1;
     },
   },
@@ -32,10 +32,11 @@ const usersSlice = createSlice({
     builder
       .addCase(fetchUsers.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.loading = false;
-        state.users = [...state.users, ...action.payload];
+        state.list = [...state.list, ...action.payload];
         state.page += 1;
       })
       .addCase(fetchUsers.rejected, (state, action) => {
@@ -45,5 +46,5 @@ const usersSlice = createSlice({
   },
 });
 
-export const { resetUsers } = usersSlice.actions;
-export default usersSlice.reducer;
+export const { resetUsers } = userSlice.actions;
+export default userSlice.reducer;
