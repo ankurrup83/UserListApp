@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import UserListScreen from '../screens/UserListScreen';
 import TodoScreen from '../screens/TodoScreen';
+import { TODOLIST, TODOLIST_ACTIVE } from '../asstes/Image/image';
 
 const Tab = createBottomTabNavigator();
 
@@ -13,15 +14,17 @@ export default function BottomTabs() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-
           if (route.name === 'Users') {
-            iconName = focused ? 'people' : 'people-outline';
+            const iconName = focused ? 'people' : 'people-outline';
+            return <Ionicons name={iconName} size={size} color={color} />;
           } else if (route.name === 'Todos') {
-            iconName = focused ? 'checkmark-done' : 'checkmark-done-outline';
+            return (
+              <Image
+                source={focused ? TODOLIST_ACTIVE : TODOLIST}
+                style={{ width: size, height: size, tintColor: focused ? color : '#9CA3AF' }}
+              />
+            );
           }
-
-          return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: '#2563EB',
         tabBarInactiveTintColor: '#9CA3AF',

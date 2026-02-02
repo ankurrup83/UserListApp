@@ -17,13 +17,25 @@ const todoSlice = createSlice({
       const todo = state.list.find(t => t.id === action.payload);
       todo.completed = !todo.completed;
     },
+    updateTodo: (state, action) => {
+      const { id, text, completed } = action.payload;
+      const todo = state.list.find(t => t.id === id);
+      if (todo) {
+        if (text !== undefined) todo.text = text;
+        if (completed !== undefined) todo.completed = completed;
+      }
+    },
     deleteTodo: (state, action) => {
-      state.lastDeleted = state.list.find(t => t.id === action.payload);
-      state.list = state.list.filter(t => t.id !== action.payload);
+      const index = state.list.findIndex(t => t.id === action.payload);
+      if (index !== -1) {
+        state.lastDeleted = { todo: state.list[index], index };
+        state.list.splice(index, 1);
+      }
     },
     undoDelete: (state) => {
       if (state.lastDeleted) {
-        state.list.push(state.lastDeleted);
+        const { todo, index } = state.lastDeleted;
+        state.list.splice(index, 0, todo);
         state.lastDeleted = null;
       }
     },
@@ -34,6 +46,7 @@ export const {
   setTodos,
   addTodo,
   toggleTodo,
+  updateTodo,
   deleteTodo,
   undoDelete,
 } = todoSlice.actions;
