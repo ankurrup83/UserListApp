@@ -14,7 +14,7 @@ function UserCard({ user, onPress }) {
                     <Text style={styles.label}> Email</Text>
                     <Text style={styles.value}>{email}</Text>
 
-                    <Text style={styles.label}>📞 Phone</Text>
+                    <Text style={styles.label}>Phone</Text>
                     <Text style={styles.value}>{phone}</Text>
 
                     <Text style={styles.label}> Website</Text>
