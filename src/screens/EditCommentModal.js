@@ -64,7 +64,7 @@ export default function EditCommentModal({ comment, onClose }) {
                                 disabled={loading}
                             >
                                 <Text style={styles.submitButtonText}>
-                                    {loading ? 'Submitting...' : 'Update'}
+                                    {loading ? 'Submitting...' : 'Submit'}
                                 </Text>
                             </TouchableOpacity>
                         </View>

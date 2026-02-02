@@ -1,36 +1,26 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
-
-const { width } = Dimensions.get('window');
+import { View, Text, StyleSheet } from 'react-native';
 
 const PostItem = ({ item }) => {
     return (
         <View style={styles.container}>
-            <View style={styles.ticket}>
-                <View style={styles.header}>
-                    <View style={styles.idBadge}>
-                        <Text style={styles.idText}># {item.id}</Text>
-                    </View>
-                </View>
+            {/* Label for Title */}
+            <Text style={styles.label}>Title</Text>
 
-                <View style={styles.dividerContainer}>
-                    <View style={styles.punchHoleLeft} />
-                    <View style={styles.dashedLine} />
-                    <View style={styles.punchHoleRight} />
-                </View>
+            {/* Box for Title Value */}
+            <View style={styles.box}>
+                <Text style={styles.titleText}>{item.title}</Text>
+            </View>
 
-                <View style={styles.content}>
-                    <Text style={styles.title} numberOfLines={2}>
-                        {item.title}
-                    </Text>
-                    <Text style={styles.body} numberOfLines={3}>
-                        {item.body}
-                    </Text>
+            {/* Content Box for Body */}
+            <View style={[styles.box, styles.bodyBox]}>
+                <Text style={styles.bodyText} numberOfLines={3}>
+                    {item.body}
+                </Text>
+            </View>
 
-                    <View style={styles.footer}>
-                        <Text style={styles.moreText}>View Comments →</Text>
-                    </View>
-                </View>
+            <View style={styles.footer}>
+                <Text style={styles.moreText}>View Comments →</Text>
             </View>
         </View>
     );
@@ -39,85 +29,47 @@ const PostItem = ({ item }) => {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        paddingHorizontal: 16,
-        paddingVertical: 10,
+        paddingHorizontal: 20,
+        paddingVertical: 15,
+        backgroundColor: '#F3F4F6',
     },
-    ticket: {
-        backgroundColor: '#FFFFFF',
-        borderRadius: 15,
-        overflow: 'hidden',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.1,
-        shadowRadius: 8,
-        elevation: 5,
-    },
-    header: {
-        padding: 16,
-        backgroundColor: '#FAFBFC',
-        borderTopLeftRadius: 15,
-        borderTopRightRadius: 15,
-    },
-    idBadge: {
-        backgroundColor: '#6366F1',
-        paddingHorizontal: 10,
-        paddingVertical: 4,
-        borderRadius: 20,
-        alignSelf: 'flex-start',
-    },
-    idText: {
-        color: '#FFFFFF',
-        fontSize: 12,
+    label: {
+        fontSize: 14,
         fontWeight: '700',
+        color: '#111827',
+        marginBottom: 8,
+        marginLeft: 4,
     },
-    dividerContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        height: 20,
+    box: {
         backgroundColor: '#FFFFFF',
-    },
-    punchHoleLeft: {
-        width: 20,
-        height: 20,
-        borderRadius: 10,
-        backgroundColor: '#F3F4F6',
-        marginLeft: -10,
-    },
-    punchHoleRight: {
-        width: 20,
-        height: 20,
-        borderRadius: 10,
-        backgroundColor: '#F3F4F6',
-        marginRight: -10,
-    },
-    dashedLine: {
-        flex: 1,
-        height: 1,
-        borderStyle: 'dashed',
+        borderRadius: 12,
+        padding: 12,
         borderWidth: 1,
         borderColor: '#E5E7EB',
-        marginHorizontal: 10,
+        marginBottom: 12,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.05,
+        shadowRadius: 2,
+        elevation: 2,
     },
-    content: {
-        padding: 16,
+    bodyBox: {
+        minHeight: 80,
     },
-    title: {
-        fontSize: 18,
-        fontWeight: '800',
-        color: '#1F2937',
-        marginBottom: 8,
+    titleText: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#374151',
         textTransform: 'capitalize',
     },
-    body: {
+    bodyText: {
         fontSize: 14,
-        color: '#4B5563',
+        color: '#6B7280',
         lineHeight: 20,
     },
     footer: {
-        marginTop: 15,
-        borderTopWidth: 1,
-        borderTopColor: '#F3F4F6',
-        paddingTop: 10,
+        alignItems: 'flex-end',
+        marginTop: -4,
     },
     moreText: {
         color: '#6366F1',
