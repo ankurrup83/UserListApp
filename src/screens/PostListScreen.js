@@ -76,6 +76,17 @@ export default function PostListScreen({ navigation }) {
                 onEndReached={handleLoadMore}
                 onEndReachedThreshold={0.5}
                 ListFooterComponent={renderFooter}
+                initialNumToRender={5}
+                removeClippedSubviews={true}
+                maxToRenderPerBatch={5}
+                windowSize={10}
+                updateCellsBatchingPeriod={50}
+                scrollEventThrottle={16}
+                getItemLayout={(data, index) => ({
+                    length: 100,
+                    offset: 100 * index,
+                    index,
+                })}
             />
         </View>
     );
